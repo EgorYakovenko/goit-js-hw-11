@@ -110,13 +110,6 @@ function renderCard(picture) {
       .join('');
 };
 
-function onSuccessfully() {
-    iziToast.success({
-    title: 'OK',
-    message: 'Successfully inserted record!',
-});
-};
-
 function onWarning() {
     iziToast.warning({
     title: 'Caution',
