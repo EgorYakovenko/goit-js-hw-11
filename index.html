@@ -7,9 +7,30 @@
     <title>Vanilla App Template</title>
     
     <script type="module" crossorigin src="/goit-js-hw-11/commonHelpers.js"></script>
-    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-b3d1a2ef.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-46aac873.js">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/vendor-eb6030bc.css">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-3898c1d5.css">
   </head>
   <body>
+    <div class="content">
+<header class="header">
+      <div class="form-container">
+        <form class="search-form" id="search-form">
+          <input
+            id="text"
+            type="text"
+            name="query"
+            class="user-input"
+            placeholder="Search images..."
+            pattern="([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})"
+          />
+          <button type="submit" class="search-Btn"><span class="search">Search</span></button>
+        </form>
+        </header>
+        <div class="gallery"></div>
+        <div class="bottomElement"></div>
+      </div>
+    </div>
     
   </body>
 </html>
