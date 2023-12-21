@@ -1,3 +1,11 @@
+
+
+//========================================================================================================================================
+
+// Індикатор завантаження не відображається між запитами => индикатор загрузки это кнопка submit ( слово search становится анимированным )
+
+//========================================================================================================================================
+
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
@@ -9,7 +17,8 @@ const galleryWrapperEl= document.querySelector('.gallery')
 const inputValue = document.querySelector('.search-form');
 const loader = document.querySelector('.loader')
 const search = document.querySelector('.search')
-console.log(search);
+const gallery = document.querySelector('.gallery')
+
 
 const BASE_URL = 'https://pixabay.com/api/'
 const API_KEY = '41296916-da04ab2f63441e92262fae4bb'
@@ -33,14 +42,14 @@ function removeClassOnBtn() {
 function onSerch(event) {
     event.preventDefault(); 
     changeTitleOnBtn()
-  
+    clearMarcup
     const form = event.currentTarget;
     const searchQuery = form.elements.query.value;
 
-    fetchPicture(searchQuery)
-      .then(renderCard)
-      .catch(error => console.log('error'))
-      .finally(() => form.reset()).then(() => removeClassOnBtn())
+  fetchPicture(searchQuery)
+    .then(renderCard)
+    .catch(error => console.log('error'))
+    .finally(() => form.reset()).then(() => { removeClassOnBtn()})
 
 };
  
@@ -55,22 +64,26 @@ function fetchPicture(search) {
         
 };
 
+  
+
+
 function renderCard(picture) { 
   
   const respHits = picture.hits;
   if (respHits.length === 0) {
     onWarning()
   } else {
-  const murkup = createMarkup(picture.hits)
-  galleryWrapperEl.innerHTML = murkup;}
+  const markup = createMarkup(picture.hits)
+  galleryWrapperEl.innerHTML = markup;}
   
-  lightbox = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
-  });
-         
+  const lightbox = new SimpleLightbox('.gallery a', { 
+          captions: true,
+          captionsData: 'alt',
+          captionPosition: 'bottom',
+          captionDelay: 250,
+        })
+          .refresh();
+       
 };
 
  function createMarkup(arr) {
@@ -113,6 +126,15 @@ function renderCard(picture) {
 function onWarning() {
     iziToast.warning({
     title: 'Caution',
-    message: "Sorry, there are no images matching your search query. Please try again!",
-});
+      message: "Sorry, there are no images matching your search query. Please try again!",
+    
+    });
+  clearMarcup()
 };
+
+function clearMarcup() {
+  
+    gallery.innerHTML = '';
+};
+
+// new SimpleLightbox('.gallery a', { captionDelay: 250 })
